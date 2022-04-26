@@ -1,28 +1,14 @@
 package es.airamlinares.proyectocsv;
 public class Dato {
-    private String mes;
     private String provincia;
-    private float media;
+    private int paro;
     
     public Dato(){
         
     }
     
-    public Dato(String titulo){
-        this.mes = titulo.toUpperCase();
-    }
-    
-    public Dato(String titulo, String autor){
-        this.mes = titulo.toUpperCase();
-        this.provincia = autor;
-    }
-    
-    public String getMes(){
-        return mes;
-    }
-    
-    public void setMes(String mes){
-        this.mes = mes.toUpperCase();
+    public Dato(String provincia){
+        this.provincia = provincia;
     }
     
     public void setProvincia(String provincia){
@@ -32,25 +18,19 @@ public class Dato {
     public String getProvincia(){
         return provincia;
     }
-    
-    public float getMedia(){
-        return media;
-    }
-    
-    public void setMedia(int media){
-        this.media = media;
+
+    public void setParo(int paro) {
+        this.paro = paro;
     }
 
+    public int getParo() {
+        return paro;
+    }
+    
     @Override
     public String toString(){
         String r = "";
-        r += "Mes: " + mes + "\n";
-        r += "Provincia: " + provincia + "\n";
-        r += "Media: " + media;
-        return r;
-    }
-    public String horasToString(){
-        String r = "Horas: " + media;
+        r += "Provincia: " + provincia;
         return r;
     }
 }
