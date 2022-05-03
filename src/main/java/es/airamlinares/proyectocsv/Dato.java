@@ -2,6 +2,7 @@ package es.airamlinares.proyectocsv;
 public class Dato {
     private String provincia;
     private int paro;
+    private int paroEsp;
     
     public Dato(){
         
@@ -23,6 +24,14 @@ public class Dato {
         this.paro = paro;
     }
 
+    public void setParoEsp(int paroEsp) {
+        this.paroEsp = paroEsp;
+    }
+
+    public int getParoEsp() {
+        return paroEsp;
+    }
+    
     public int getParo() {
         return paro;
     }

@@ -8,6 +8,8 @@ import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -30,6 +32,7 @@ public class App extends Application {
         stage.show();
         
         leerFichero(paneRoot);
+        guardar(paneRoot);
     }
 
     public static void main(String[] args) {
@@ -45,13 +48,17 @@ public class App extends Application {
 
         // Añadir un label en el que se mostrará el elemento seleccionado
         Label seleccionado = new Label();
+        Label esp = new Label();
         paneRoot.getChildren().add(seleccionado);
+        paneRoot.getChildren().add(esp);
 
         // Cuando el usuario seleccione algo del ComboBox, se mostrará en el Label
         comboBox.setOnAction((t) -> {
             valorCombo = comboBox.getValue();
             Calculos calc = new Calculos();
-            seleccionado.setText("Media de paro en " + valorCombo + ": " + calc.media());
+            calc.media();
+            seleccionado.setText("Media de paro en " + valorCombo + ": " + calc.mediaProv);
+            esp.setText("Media de paro en España por cada ciudad/pueblo: " + calc.mediaEsp);
         });
     }
     private void leerFichero(VBox paneRoot) {
@@ -107,5 +114,18 @@ public class App extends Application {
                 ex.printStackTrace();
             }
         }
+    }
+    private void guardar(VBox paneRoot) {
+        Button guardar = new Button("Guardar");
+        paneRoot.getChildren().add(guardar);
+        guardar.setOnAction(t -> { 
+            Exportacion.exportarCSV();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Datos Guardados");
+            alert.setHeaderText("Se han guardado exitosamente en el fichero");
+            alert.setContentText("Se han escrito los datos correctamente de su seleccion" );
+            alert.showAndWait();
+        });
+        
     }
 }

@@ -5,10 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 public class Calculos {
-    int sumaParo;
-    int cont = 0;
-    float media;
-    public float media() {
+    int sumaParoProv;
+    int contProv = 0;
+    static float mediaProv;
+    int contEsp = 0;
+    int sumaParoEsp;
+    int contLin = 0;
+    static float mediaEsp;
+    public void media() {
         String nombreFichero = "ParoEspaña.csv";
         // Declarar una variable BufferedReader
         BufferedReader br = null;
@@ -20,13 +24,20 @@ public class Calculos {
             String texto = br.readLine();
             // Repetir mientras no se llegue al final del fichero
             while(texto != null) {
+                contLin++;
                 Dato dato = new Dato();
                 String[] valores = texto.split(";");
                 dato.setProvincia(valores[3]);
+                if(contLin > 2) {
+                    dato.setParoEsp(Integer.valueOf(valores[8]));
+                    sumaParoEsp += dato.getParoEsp();
+                    contEsp++;
+                }
                 if(App.valorCombo.equals(dato.getProvincia())) {
+                    //System.out.println(valores[8]);
                     dato.setParo(Integer.valueOf(valores[8]));
-                    sumaParo += dato.getParo();
-                    cont++;
+                    sumaParoProv += dato.getParo();
+                    contProv++;
                 }
                 // Leer la siguiente línea
                 texto = br.readLine();
@@ -55,7 +66,10 @@ public class Calculos {
                 ex.printStackTrace();
             }
         }
-        media = sumaParo/cont;
-        return media;
+        System.out.println(sumaParoProv);
+        System.out.println(contProv);
+        mediaProv = sumaParoProv/contProv;
+        mediaEsp = sumaParoEsp/contEsp;
+        System.out.println(mediaEsp);
     }
 }
